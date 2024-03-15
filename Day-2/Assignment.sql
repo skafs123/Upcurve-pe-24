@@ -223,3 +223,154 @@ where E.salary > (select AVG(salary) from employees)
 ORDER BY E.salary ASC ;
 
 
+/*
+21.
+Write a query that displays the employee number and lastname of all employees whowork in a department with any employee whose lastname contains a "u".
+*/
+select   E1.employee_id,E1.last_name ,E1.department_id
+from employees E1 
+where E1.department_id  in (select DISTINCT E.department_id from  employees E  
+				Where    E.last_name IS NOT NULL AND INSTR(E.last_name,"u") > 0 )
+ORDER BY E1.department_id;
+
+
+
+
+/*
+22.
+Display the lastname, department number, and job id of all employees whosedepartment location id is 1700.
+*/
+
+select   E.last_name ,E.department_id,E.job_id	
+from employees E 
+	JOIN departments D
+	ON E.department_id = D.department_id 
+where D.location_id = 1700;
+
+/*
+23.
+Display the lastname and salary of every employee who reports to "King".
+--self join with employee on manager id and last name = King 
+*/
+
+/*
+24.
+Display the department number, lastname, and job id for every employee in the"Executive" department.
+--JOIN with departments and department_name = "Executive"
+*/
+
+
+/*
+25.
+Display the employee number, lastname, and salary of all employees who earn morethan the average salary and who work in a department with any employee with a "u"in their lastname.
+*/
+select   E1.employee_id,E1.last_name ,E1.salary	
+from employees E1 
+where E1.department_id  in (select DISTINCT E.department_id from  employees E  
+				Where    E.last_name IS NOT NULL AND INSTR(E.last_name,"u") > 0 )
+AND E1.salary	> ( SELECT AVG(salary) from employees)
+ORDER BY E1.department_id;
+
+
+/*
+26.
+Write a query to get unique department ID from employee table.
+--DISTINCT department_id from employees 
+*/
+
+/*
+27.
+Write a query to get all employee details from the employee table order by firstname, descending.
+--ORDER BY first_name DESC
+*/
+
+/*
+28.
+Write a query to get the names (first_name, last_name), salary, PF of all theemployees (PF is calculated as 15% of salary).
+*/
+
+select   E1.employee_id,E1.last_name ,E1.salary	, E1.salary*0.15 AS PF
+from employees E1 ;
+
+/*
+29.
+Write a query to get the employee ID, names (first_name, last_name), salary inascending order of salary.
+--ORDER BY salary ASC
+*/
+
+
+/*
+30.
+Write a query to get the total salaries payable to employees.
+*/
+
+select SUM(salary) from employees;
+
+/*
+31.
+Write a query to get the maximum and minimum salary from employees table.
+
+*/
+select MAX(salary),MIN(salary) from employees;
+
+/*
+32.
+Write a query to get the average salary and number of employees in the employeestable.
+*/
+select AVG(salary),COUNT(*) from employees;
+
+/*
+33.
+Write a query to get the number of employees working with the company.
+*/
+select COUNT(*) from employees;
+
+/*
+34.
+Write a query to get the number of jobs available in the employees table
+*/
+select COUNT(DISTINCT job_id) from employees ;
+
+/*
+35.
+Write a query get all first name from employees table in upper case.
+*/
+select UPPER(first_name) from employees ;
+
+/*
+36.
+Write a query to get the first 3 characters of first name from employees table.
+*/
+select left(first_name,3) from employees ;
+
+
+/*
+37.
+Write a query to get the names (for example Ellen Abel, Sundar Ande etc.) of all theemployees from employees table.
+*/
+select CONCAT_WS(' ',first_name,last_name) AS name from employees;
+
+/*
+38.
+Write a query to get first name from employees table after removing white spacesfrom both side.
+*/
+select TRIM(first_name) from employees;
+
+/*
+39.
+Write a query to get the length of the employee names (first_name, last_name) fromemployees table.
+*/
+select CONCAT_WS(' ',first_name,last_name), LENGTH(CONCAT_WS(' ',first_name,last_name)) AS Length from employees;
+
+
+/*
+40.
+Write a query to check if the first_name fields of the employees table containsnumbers.
+--NOT YET FOUND A SOLUTION
+*/
+
+
+
+
+
+
