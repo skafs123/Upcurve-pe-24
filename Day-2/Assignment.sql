@@ -361,7 +361,7 @@ select TRIM(first_name) from employees;
 Write a query to get the length of the employee names (first_name, last_name) fromemployees table.
 */
 select CONCAT_WS(' ',first_name,last_name), LENGTH(CONCAT_WS(' ',first_name,last_name)) AS Length from employees;
-
+ 
 
 /*
 40.
@@ -369,6 +369,32 @@ Write a query to check if the first_name fields of the employees table containsn
 --NOT YET FOUND A SOLUTION
 */
 
+/*
+41.
+Write a query to select first 10 records from a table.
+
+*/
+
+Select * from employees Limit 10;
+
+/*
+42.
+Write a query to get monthly salary (round 2 decimal places) of each and everyemployee.
+*/
+Select round(salary/12,2) AS "Monthly Slry" from employees ;
+
+/*43.
+Write a query to display the name (first_name, last_name) and salary for allemployees whose salary is not in the range $10,000 through $15,000.
+*/
+select CONCAT_WS(' ',first_name, last_name) AS Name, salary from employees where salary NOT BETWEEN 10000 AND 15000;
+
+
+/*
+44.
+Write a query to display the name (first_name, last_name) and department ID of allemployees in departments 30 or 100 in ascending order.
+*/
+
+select CONCAT_WS(' ',first_name, last_name) AS Name, department_id from employees where department_id  IN (30,100);
 
 
 
