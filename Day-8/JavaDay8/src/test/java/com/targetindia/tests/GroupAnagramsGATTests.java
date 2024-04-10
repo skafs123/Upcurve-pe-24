@@ -14,21 +14,15 @@ public class GroupAnagramsGATTests {
     void shouldGetGAWithAnagrams(){
         String[][] arr = {{"bat"},{"cat","tac","act"},{"same"},{"dog","god"},{"xyzpo"}};
 
-        ArrayList<ArrayList<String>>  expectedList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> list =
-                new ArrayList<String>(Arrays.asList(arr[0]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[1]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[2]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[3]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[4]));
-        expectedList.add(list);
+        List<List<String>> expectedList = Arrays.asList(
+                Arrays.asList(arr[0]),
+                Arrays.asList(arr[1]),
+                Arrays.asList(arr[2]),
+                Arrays.asList(arr[3]),
+                Arrays.asList(arr[4])
+        );
 
-
-        String wordArr[]
+        String[] wordArr
                 = { "cat", "dog", "tac", "god", "act","bat","same","xyzpo" };
         int size = wordArr.length;
         ArrayList<ArrayList<String>> actualList = GroupAnagrams.groupAnagramsTogether(wordArr, size);
@@ -40,21 +34,15 @@ public class GroupAnagramsGATTests {
     void shouldGetGAWithNoAnagrams(){
         String[][] arr = {{"bat"},{"cat"},{"same"},{"dog"},{"xyzpo"}};
 
-        ArrayList<ArrayList<String>>  expectedList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> list =
-                new ArrayList<String>(Arrays.asList(arr[0]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[1]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[2]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[3]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[4]));
-        expectedList.add(list);
+        List<List<String>> expectedList = Arrays.asList(
+                Arrays.asList(arr[0]),
+                Arrays.asList(arr[1]),
+                Arrays.asList(arr[2]),
+                Arrays.asList(arr[3]),
+                Arrays.asList(arr[4])
+        );
 
-
-        String wordArr[]
+        String[] wordArr
                 = { "cat", "dog", "bat","same","xyzpo" };
         int size = wordArr.length;
         ArrayList<ArrayList<String>> actualList = GroupAnagrams.groupAnagramsTogether(wordArr, size);
@@ -65,21 +53,15 @@ public class GroupAnagramsGATTests {
     void shouldGetGAWithDiffLength(){
         String[][] arr = {{"bat"},{"catch"},{"same"},{"digging"},{"xyzpogh"}};
 
-        ArrayList<ArrayList<String>>  expectedList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> list =
-                new ArrayList<String>(Arrays.asList(arr[0]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[1]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[2]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[3]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[4]));
-        expectedList.add(list);
+        List<List<String>> expectedList = Arrays.asList(
+                Arrays.asList(arr[0]),
+                Arrays.asList(arr[1]),
+                Arrays.asList(arr[2]),
+                Arrays.asList(arr[3]),
+                Arrays.asList(arr[4])
+        );
 
-
-        String wordArr[]
+        String[] wordArr
                 = { "catch", "digging", "bat","same","xyzpogh" };
         int size = wordArr.length;
         ArrayList<ArrayList<String>> actualList = GroupAnagrams.groupAnagramsTogether(wordArr, size);
@@ -90,23 +72,17 @@ public class GroupAnagramsGATTests {
     void shouldGetGAWithSpecChar(){
         String[][] arr = {{"dog!"},{"cat?", "tac?", "act?"},{"xyzpo@@"},{"bat"},{"same"},{"god"}};
 
-        ArrayList<ArrayList<String>>  expectedList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> list =
-                new ArrayList<String>(Arrays.asList(arr[0]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[1]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[2]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[3]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[4]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[5]));
-        expectedList.add(list);
+        List<List<String>> expectedList = Arrays.asList(
+                Arrays.asList(arr[0]),
+                Arrays.asList(arr[1]),
+                Arrays.asList(arr[2]),
+                Arrays.asList(arr[3]),
+                Arrays.asList(arr[4]),
+                Arrays.asList(arr[5])
+        );
 
 
-        String wordArr[]
+        String[] wordArr
                 = { "cat?", "dog!", "tac?", "god", "act?","bat","same","xyzpo@@" };
         int size = wordArr.length;
         ArrayList<ArrayList<String>> actualList = GroupAnagrams.groupAnagramsTogether(wordArr, size);
@@ -118,24 +94,17 @@ public class GroupAnagramsGATTests {
     void shouldGetGAWithUpperLower(){
         String[][] arr = {{"ACT"},{"DOG"},{"bat"},{"cat","tac"},{"same"},{"god"},{"xyzpo"}};
 
-        ArrayList<ArrayList<String>>  expectedList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> list =
-                new ArrayList<String>(Arrays.asList(arr[0]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[1]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[2]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[3]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[4]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[5]));
-        expectedList.add(list);
-        list = new ArrayList<String>(Arrays.asList(arr[6]));
-        expectedList.add(list);
+        List<List<String>> expectedList = Arrays.asList(
+                Arrays.asList(arr[0]),
+                Arrays.asList(arr[1]),
+                Arrays.asList(arr[2]),
+                Arrays.asList(arr[3]),
+                Arrays.asList(arr[4]),
+                Arrays.asList(arr[5]),
+                Arrays.asList(arr[6])
+        );
 
-        String wordArr[]
+        String[] wordArr
                 = { "cat", "DOG", "tac", "god", "ACT","bat","same","xyzpo" };
         int size = wordArr.length;
         ArrayList<ArrayList<String>> actualList = GroupAnagrams.groupAnagramsTogether(wordArr, size);
@@ -145,18 +114,15 @@ public class GroupAnagramsGATTests {
 
     @Test
     void shouldGetGAWithEmptyArray(){
-        String[][] arr = {{""}};
 
-        ArrayList<ArrayList<String>>  expectedList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> list =
-                new ArrayList<String>(Arrays.asList(arr[0]));
-        expectedList.add(list);
+        List<List<String>> expectedList = Arrays.asList(
+                Arrays.asList("")
+        );
 
-        String wordArr[]
+        String[] wordArr
                 = {""};
         int size = wordArr.length;
         ArrayList<ArrayList<String>> actualList = GroupAnagrams.groupAnagramsTogether(wordArr, size);
-
         Assertions.assertEquals(expectedList, actualList);
     }
 
