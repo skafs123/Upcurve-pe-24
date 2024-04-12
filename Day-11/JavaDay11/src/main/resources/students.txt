@@ -1,0 +1,8 @@
+John,80
+kavitha,100
+Rosy,30
+Raj,70
+Anuj,90
+Venkat,66
+Raghu,55
+Swami,49
