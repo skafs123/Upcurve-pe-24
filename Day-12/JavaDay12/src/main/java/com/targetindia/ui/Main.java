@@ -46,6 +46,8 @@ public class Main {
                     findCustByCity();
                     break;
                 case 7://Update customer data
+                    System.out.println("Not yet implemented");
+                    break;
                 case 8://Delete customer data
                     deleteCustById();
                     break;
@@ -58,6 +60,7 @@ public class Main {
     private void deleteCustById() {
         //get the id from input
         String id = KeyboardUtil.getString("Please input the customer id: ");
+        id= id.trim();
         if(id != null) {
             try{
                 service.deleteCustomerById(id);
@@ -125,6 +128,7 @@ public class Main {
     private void findCustById() {
         //get the id from input
         String id = KeyboardUtil.getString("Please input the customer id: ");
+        id= id.trim();
         if(id != null) {
             var customer = service.findCustomerById(id);
             if( customer != null) {

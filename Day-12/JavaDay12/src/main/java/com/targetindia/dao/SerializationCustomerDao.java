@@ -86,7 +86,7 @@ public class SerializationCustomerDao implements CustomerDao {
         return customers
                 .values()
                 .stream()
-                .filter(customer -> customer.getCity().toLowerCase(Locale.ROOT).equals(city.toLowerCase()))
+                .filter(customer -> customer.getCity().equalsIgnoreCase(city))
                 .collect(Collectors.toList());
     }
 
