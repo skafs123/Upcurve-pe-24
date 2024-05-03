@@ -9,7 +9,9 @@ public class Main {
     public static void main(String[] args) {
 
         //Queue<String> queue = new LinkedListQueue<>();
-        Queue<String> queue = new ArrayQueue<>();
+        //Queue<String> queue = new ArrayQueue<>();
+        //Queue<String> queue = new SLListQueue<>();
+        Queue<String> queue = new CircularQueue<>();
 
         int choice;
         while (true) {

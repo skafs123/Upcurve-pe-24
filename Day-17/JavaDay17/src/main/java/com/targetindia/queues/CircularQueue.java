@@ -2,7 +2,7 @@ package com.targetindia.queues;
 
 import java.util.NoSuchElementException;
 
-public class ArrayQueue<T> implements Queue<T>{
+public class CircularQueue<T> implements Queue<T>{
 
     private int capacity = 5;
     private Object[] elements;
@@ -12,51 +12,63 @@ public class ArrayQueue<T> implements Queue<T>{
 
     private int size = 0;
 
-    public ArrayQueue() {
+    public CircularQueue() {
         elements = new Object[capacity]; // O(1)
     } // O(1)
 
-    public ArrayQueue(int capacity) {
+    public CircularQueue(int capacity) {
         this.capacity = capacity; // O(1)
         elements = new Object[capacity]; // O(1)
     } // O(1)
 
     @Override
     public void enqueue(T item) {
-        if (rear == capacity - 1) { // O(1)
+        if(size==capacity) // O(1)
+        {
             grow();  // O(n)
         }
-        if(size==0)
+        if(size==0) {
             front=0;
+        }
+        if (rear == capacity - 1) { //has reached the end,so reset
+            rear = -1; // O(1)
+        }
         rear++; // O(1)
         elements[rear] = item; // O(1)
-        size++;
+        size++; // O(1)
     } // O(n) <-- worst case time complexity
 
     private void grow() {
-        if(size < capacity)
-        {
-            //slide the queue to the front of the array
-            for (int i = 0; i < size; i++) { // O(n)
-                 elements[i] =elements[front+i] ; // O(1)
-            }
-            front=0;// O(1)
-            rear = size-1;// O(1)
-        }
-        else
-        {
+
             //grow the array
             // make room for new elements or increase (usually double) the capacity
             capacity *= 2; // O(1)
             Object[] newElements = new Object[capacity]; // O(1)
             // copy values from `elements` to `newElements`
-            for (int i = 0; i < elements.length; i++) { // O(n)
-                newElements[i] = elements[i]; // O(1)
+            if(front < rear)
+            {
+                for (int i = 0; i < size; i++) { // O(n)
+                    newElements[i] = elements[i]; // O(1)
+                }
             }
+            else {
+                //copy from front till size-1
+                //copy from 0 till rear
+                int j=0;
+                for (int i = front; i < size; i++) {
+                    newElements[j++] =elements[i] ; // O(1)
+                }
+                for (int i = 0; i <= rear; i++) {
+                    newElements[j++] =elements[i] ; // O(1)
+                }
+                front =0; //O(1)
+                rear = size-1; //O(1)
+
+            }//O(n)
+
             // using the builtin native function
             // System.arraycopy(elements, 0, newElements, 0, elements.length);
             elements = newElements; // O(1)
-        }
 
     } // O(n)
 
@@ -77,12 +89,14 @@ public class ArrayQueue<T> implements Queue<T>{
         elements[front] = null; // O(1)
         if(size == 1 )
         {
-            front = rear = -1; //O(1)
+            front = rear = -1; // O(1)
         }
         else {
-            front++; // O(1)
-        }
-        size--; //O(1)
+            if(front == capacity-1)
+              front = 0;
+            else front++;
+        } // O(1)
+        size--; // O(1)
         return (T) data; // O(1)
     } // O(1)
 
@@ -107,12 +121,30 @@ public class ArrayQueue<T> implements Queue<T>{
 
         StringBuilder sb = new StringBuilder(); // O(1)
         sb.append("["); // O(M)
-        for (int i = front; i < rear; i++) { // O(N)
-            sb.append(elements[i]); // O(M)
-            sb.append(", "); // O(M)
+
+        if(front < rear) {
+            for (int i = front; i < rear; i++) { // O(N)
+                sb.append(elements[i]); // O(M)
+                sb.append(", "); // O(M)
+            }
+            sb.append(elements[rear]); // O(M)
+        } else if  (front==rear) { 
+            sb.append(elements[front]); // O(M)
         }
-        sb.append(elements[rear]); // O(M)
+        else
+        {
+                for (int i = front; i < capacity; i++) { // O(N)
+                    sb.append(elements[i]); // O(M)
+                    sb.append(", "); // O(M)
+                }
+                for (int i = 0; i < rear; i++) { // O(N)
+                    sb.append(elements[i]); // O(M)
+                    sb.append(", "); // O(M)
+                }
+                sb.append(elements[rear]); // O(M)
+        }
         sb.append("]"); // O(M)
         return sb.toString(); // O(1)
     } // O(N)
 }
+
