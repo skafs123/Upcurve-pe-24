@@ -12,11 +12,20 @@ public class Main {
         int data;
         BinarySearchTree bst = new BinarySearchTree();
 
-        Random r = new Random();
+        /*Random r = new Random();
         for (int i = 0; i < 15; i++) {
             bst.insert(r.nextInt(500));
-        }
-
+        }*/
+        bst.insert(100);
+        bst.insert(50);
+        bst.insert(40);
+        bst.insert(55);
+        bst.insert(60);
+        bst.insert(200);
+        bst.insert(150);
+        bst.insert(300);
+        bst.insert(250);
+        bst.insert(310);
 
         while ((choice = menu()) != 0) {
 
