@@ -194,7 +194,7 @@ public class BinarySearchTree {
 
     private int findTreeLength(TreeNode node) {
             if (node == null)
-                return 0;
+                return -1;
             else {
                 // Find the height of both subtrees
                 // and use the larger one
