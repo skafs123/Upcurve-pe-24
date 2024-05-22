@@ -1,6 +1,7 @@
 package com.targetindia.controllers;
 
 import com.targetindia.model.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/customers")
+@Slf4j
 public class CustomersController {
 
     private List<Customer> customers;
@@ -97,53 +99,54 @@ public class CustomersController {
         }
 
         // email should be unique
-        var oldEmail = cust.getEmail();
-        if(customer.getEmail().equals(oldEmail) == false)
+        if(customer.getEmail().equals(cust.getEmail()) == false)
         {
+            /*
             cust.setEmail("");
             var customerCount = customers.stream()
                     .filter(c -> c.getEmail().equals(customer.getEmail()))
                     .count();
             cust.setEmail(oldEmail);
+            */
+            // check if the email given is not matching with any other emails
+            var customerCount = customers.stream()
+                    .filter(c -> !c.getId().equals(id) && c.getEmail().equals(customer.getEmail()))
+                    .count();
             if (customerCount > 0) {
                 err.put("message", "a customer with this email already present in our database");
                 err.put("timestamp", new Date());
                 return ResponseEntity.badRequest().body(err);
             }
-            cust.setEmail(customer.getEmail());
         }
 
         // phone if not null, should be unique
         if(customer.getPhone()!=null){
 
-            var oldPhone = cust.getPhone();
-            if(customer.getPhone().equals(oldPhone) == false) {
+            if(customer.getPhone().equals(cust.getPhone()) == false) {
+                /*
                 cust.setPhone("");
                 var customerCount = customers.stream()
                         .filter(c -> c.getPhone()!=null && c.getPhone().equals(customer.getPhone()))
                         .count();
                 cust.setPhone(oldPhone);
+                 */
+                var customerCount = customers.stream()
+                        .filter(c -> !c.getId().equals(id) &&  c.getPhone()!=null && c.getPhone().equals(customer.getPhone()))
+                        .count();
                 if (customerCount > 0) {
                     err.put("message", "a customer with this phone already present in our database");
                     err.put("timestamp", new Date());
                     return ResponseEntity.badRequest().body(err);
                 }
-                cust.setPhone(customer.getPhone());
+
             }
 
         }
-        //name ,email are mandatory
-        if (cust.getName().equals(customer.getName()) == false )
-            cust.setName(customer.getName());
 
-        //city
-        //update if  field has changed
-        if( customer.getCity() != null) {
-            if (customer.getCity().equals(cust.getCity()) == false)
-                cust.setCity(customer.getCity());
-        }
-
-        return ResponseEntity.ok(cust);
+        var index = customers.indexOf(cust);
+        customer.setId(id);
+        customers.set(index, customer);
+        return ResponseEntity.ok(customer);
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
@@ -169,11 +172,11 @@ public class CustomersController {
         if( customer.getEmail() != null) {
             var oldEmail = cust.getEmail();
             if (customer.getEmail().equals(oldEmail) == false) {
-                cust.setEmail("");
+
                 var customerCount = customers.stream()
-                        .filter(c -> c.getEmail().equals(customer.getEmail()))
+                        .filter(c -> !c.getId().equals(id) &&  c.getEmail().equals(customer.getEmail()))
                         .count();
-                cust.setEmail(oldEmail);
+
                 if (customerCount > 0) {
                     err.put("message", "a customer with this email already present in our database");
                     err.put("timestamp", new Date());
@@ -187,11 +190,11 @@ public class CustomersController {
         if(customer.getPhone()!=null){
             var oldPhone = cust.getPhone();
             if(customer.getPhone().equals(oldPhone) == false) {
-                cust.setPhone("");
+
                 var customerCount = customers.stream()
-                        .filter(c -> c.getPhone()!=null && c.getPhone().equals(customer.getPhone()))
+                        .filter(c -> !c.getId().equals(id) &&  c.getPhone()!=null && c.getPhone().equals(customer.getPhone()))
                         .count();
-                cust.setPhone(oldPhone);
+
                 if (customerCount > 0) {
                     err.put("message", "a customer with this phone already present in our database");
                     err.put("timestamp", new Date());
