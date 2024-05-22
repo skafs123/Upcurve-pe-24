@@ -1,0 +1,2 @@
+Spring boot project with dependency injection. The business logic has been moved to service layer from the controller.
+Implement handlers in the controller/CustomersController and service/CustomerService.java for the following requests PUT,PATCH and DELETE.
