@@ -36,4 +36,5 @@ GET /api/categories/34
 Host: {{HOST}}
 Accept: application/xml
 
+
 ###
